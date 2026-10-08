@@ -16,11 +16,11 @@ export function Picker({ onResult }: { onResult: (r: string) => void }) {
   const pick = () => {
     if (items.length < 1 || rolling) return;
     let n = 0;
-    const final = items[Math.floor(Math.random() * items.length)];
+    const final = items[Math.floor(Math.random() * items.length)]!;
     const go = () => {
       n++;
       if (n < 22) {
-        setRolling(items[Math.floor(Math.random() * items.length)]);
+        setRolling(items[Math.floor(Math.random() * items.length)]!);
         sfx.roll();
         setTimeout(go, 40 + n * n * 0.6);
       } else {

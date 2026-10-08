@@ -5,7 +5,7 @@ import { sfx, buzz } from "@/lib/audio";
 const PAIRS = [["Heads", "Tails"], ["Yes", "No"], ["Buy", "Pass"], ["Option A", "Option B"]];
 
 export function Coin({ onResult }: { onResult: (r: string) => void }) {
-  const [labels, setLabels] = useState(["Heads", "Tails"]);
+  const [labels, setLabels] = useState<string[]>(["Heads", "Tails"]);
   const [deg, setDeg] = useState(0);
   const [flipping, setFlipping] = useState(false);
   const [result, setResult] = useState<string | null>(null);
@@ -19,7 +19,7 @@ export function Coin({ onResult }: { onResult: (r: string) => void }) {
     setFlipping(true); setResult(null); setK((x) => x + 1);
     sfx.clink(); buzz(20);
     setTimeout(() => {
-      const r = heads ? labels[0] : labels[1];
+      const r = (heads ? labels[0] : labels[1])!;
       setFlipping(false); setResult(r); onResult(`🪙 ${r}`);
       sfx.clink(); setTimeout(sfx.win, 150); buzz([30, 40, 30]);
       confetti({ particleCount: 80, spread: 70, origin: { y: 0.6 } });

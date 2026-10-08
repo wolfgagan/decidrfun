@@ -13,7 +13,7 @@ const PRESETS: Record<string, string[]> = {
 const HUES = [25, 190, 85, 145, 330, 230, 55, 165];
 
 export function Wheel({ onResult }: { onResult: (r: string) => void }) {
-  const [options, setOptions] = useState(PRESETS["Where to Eat?"]);
+  const [options, setOptions] = useState<string[]>(PRESETS["Where to Eat?"]!);
   const [input, setInput] = useState("");
   const [spinning, setSpinning] = useState(false);
   const [winner, setWinner] = useState<string | null>(null);
@@ -74,7 +74,7 @@ export function Wheel({ onResult }: { onResult: (r: string) => void }) {
       draw();
       if (p < 1) requestAnimationFrame(step);
       else {
-        const w = options[cur];
+        const w = options[cur]!;
         setSpinning(false);
         setWinner(w);
         onResult(`🎡 ${w}`);
@@ -131,7 +131,7 @@ export function Wheel({ onResult }: { onResult: (r: string) => void }) {
           <p className="mb-2 text-xs font-semibold uppercase tracking-wider text-muted-foreground">Presets</p>
           <div className="flex flex-wrap gap-2">
             {Object.keys(PRESETS).map((k) => (
-              <button key={k} onClick={() => setOptions(PRESETS[k])} className="chip rounded-full px-3 py-1.5 text-sm font-medium">{k}</button>
+              <button key={k} onClick={() => setOptions(PRESETS[k]!)} className="chip rounded-full px-3 py-1.5 text-sm font-medium">{k}</button>
             ))}
           </div>
         </div>
