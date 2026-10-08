@@ -6,7 +6,7 @@ export function shuffle<T>(arr: T[], rand: () => number = Math.random): T[] {
   const a = [...arr];
   for (let i = a.length - 1; i > 0; i--) {
     const j = Math.floor(rand() * (i + 1));
-    [a[i], a[j]] = [a[j], a[i]];
+    [a[i], a[j]] = [a[j] as T, a[i] as T];
   }
   return a;
 }
@@ -14,7 +14,7 @@ export function shuffle<T>(arr: T[], rand: () => number = Math.random): T[] {
 /** Split into n balanced groups (sizes differ by at most 1). */
 export function splitTeams<T>(arr: T[], n: number, rand: () => number = Math.random): T[][] {
   const teams: T[][] = Array.from({ length: Math.max(1, n) }, () => []);
-  shuffle(arr, rand).forEach((x, i) => teams[i % teams.length].push(x));
+  shuffle(arr, rand).forEach((x, i) => teams[i % teams.length]!.push(x));
   return teams;
 }
 
